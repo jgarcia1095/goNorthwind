@@ -7,10 +7,12 @@ type Service interface {
 }
 
 type service struct {
+	//se define la estructura para acceder a repository
 	repo Repository
 }
 
 func NewService(repo Repository) Service {
+	//se asigna instancia de repository sobre la propiedad repo
 	return &service{
 		repo: repo,
 	}

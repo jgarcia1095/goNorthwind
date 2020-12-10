@@ -6,6 +6,7 @@ import (
 	"github.com/go-kit/kit/endpoint"
 )
 
+//almacena las estructuras para el envio de parametros
 type getProductsRequest struct {
 	Limit  int
 	Offset int

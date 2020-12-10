@@ -6,19 +6,23 @@ import (
 	"github.com/golangRestApi/helper"
 )
 
+//Interface para agregar comportamiento adicional a una estructura
 type Repository interface {
 	GetProducts(params *getProductsRequest) ([]*Product, error)
 	GetTotalProducts() (int, error)
 }
 
 type repository struct {
+	//se agrega propiedad db para almacenar la conexion
 	db *sql.DB
 }
 
 func NewRepository(databaseConnection *sql.DB) Repository {
+	//Retorna repository con la conexion
 	return &repository{db: databaseConnection}
 }
 
+//
 func (repo *repository) GetProducts(params *getProductsRequest) ([]*Product, error) {
 	const sql = `SELECT id,product_code,product_name ,COALESCE(description,''),standard_cost ,list_price ,category 
 	FROM products

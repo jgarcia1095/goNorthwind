@@ -25,18 +25,22 @@ func main() {
 	defer dataBaseConnection.Close()
 
 	var (
+		//instancia de repository
 		productRepository = product.NewRepository(dataBaseConnection)
 	)
 
 	var (
+		//instancia de service
 		productService product.Service
 	)
-
+	//se asin valor a la instancia de servrice
 	productService = product.NewService(productRepository)
 
 	r := chi.NewRouter()
 	r.Use(helper.GetCors().Handler)
+
 	r.Mount("/products", product.MakeHTTPHandler(productService))
+
 	r.Get("/swagger/*", httpSwagger.Handler(
 		httpSwagger.URL("../swagger/doc.json"),
 	))
